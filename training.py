@@ -19,9 +19,9 @@ def getImagesAndLabels(path):
         #Now we are converting the PIL image into numpy array
         imageNp=np.array(pilImage,'uint8')
         #getting the Id from the image
-        #print(imagePath)
-        #print(os.path.split(imagePath)[-1].split(".")[2])
-        Id=int(os.path.split(imagePath)[-1].split(".")[2])
+        print(imagePath)
+        print(os.path.split(imagePath)[-1].split(".")[1])
+        Id=int(os.path.split(imagePath)[-1].split(".")[1])
         # extract the face from the training image sample
         faces=detector.detectMultiScale(imageNp)
         #If a face is there then append that in the list as well as Id of it
@@ -30,7 +30,9 @@ def getImagesAndLabels(path):
             Ids.append(Id)
     return faceSamples,Ids
 
-name = raw_input('name of the dataSet?(have to match the name with the folder)')
-faces,Ids = getImagesAndLabels('dataSet\{a}'.format(a = name))
+#name = raw_input('name of the dataSet?(have to match the name with the folder)')
+#faces,Ids = getImagesAndLabels('dataSet\{a}'.format(a = name))
+faces,Ids = getImagesAndLabels('dataSet/')
 recognizer.train(faces, np.array(Ids))
-recognizer.save('trainner/{a}.yml'.format(a = name))
+recognizer.save('trainner/dataset.yml')
+#recognizer.save('trainner/{a}.yml'.format(a = name))

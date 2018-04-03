@@ -6,7 +6,7 @@ faceDetect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 def show_webcam(mirror=False):
     id = str(raw_input("enter the id"))
-    os.makedirs("dataSet/"+id)
+    #os.makedirs("dataSet/"+id)
     cam = cv2.VideoCapture(1)
     sample = 0
     while True:
@@ -15,11 +15,11 @@ def show_webcam(mirror=False):
         faces = faceDetect.detectMultiScale(gray, 1.3, 5)
         for (x, y, w, h) in faces:
             sample = sample + 1
-            cv2.imwrite("dataSet/"+id+"/User."+str(id)+"."+str(sample)+".png", gray[y:y+h, x:x+w])
+            cv2.imwrite("dataSet/User."+str(id)+"."+str(sample)+".png", gray[y:y+h, x:x+w])
             cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
             cv2.waitKey(100)
         cv2.imshow('my webcam', img)
-        if sample > 20:
+        if sample > 50:
             break
         if mirror: 
             img = cv2.flip(img, 1)
